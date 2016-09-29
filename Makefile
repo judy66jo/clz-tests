@@ -21,4 +21,4 @@ plot: gencsv
 	gnuplot plot.gp
 	
 clean:
-	$(RM) $(EXEC) *.o result.csv
+	$(RM) $(EXEC) *.o result.csv clz_time.png clz

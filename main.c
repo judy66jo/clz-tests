@@ -18,19 +18,19 @@ int main(int argc, char const *argv[]){
 	int i, loop = 10000;
 
 	//printf("recursive     %i\n",clz_recursive(x));
-	//printf("iteration     %d\n",clz_iteration(x));
-	//printf("binary search %d\n",clz_binary_search(x));
-	//printf("byte-shift    %d\n",clz_byte_shift(x));
+	//printf("iteration     %i\n",clz_iteration(x));
+	//printf("binary search %i\n",clz_binary_search(x));
+	//printf("byte-shift    %i\n",clz_byte_shift(x));
 	//printf("harley        %i\n",clz_harley(x));
 	
 	//recursive
-	/*clock_gettime(CLOCK_ID, &start);
+	clock_gettime(CLOCK_ID, &start);
 	for(i = 0; i < loop; i++) {
         clz_recursive(x);
     }
     clock_gettime(CLOCK_ID, &end);
     printf("%lf,", (double) (end.tv_sec - start.tv_sec) +
-           (end.tv_nsec - start.tv_nsec)/ONE_SEC);*/
+           (end.tv_nsec - start.tv_nsec)/ONE_SEC);
 	
 	//iteration
 	clock_gettime(CLOCK_ID, &start);

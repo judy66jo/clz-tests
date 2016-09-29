@@ -5,14 +5,15 @@
 
 uint8_t clz_recursive(uint32_t x){
 	/* shift upper half down, rest is filled up with 0s */
-	uint16_t upper = (x >> 16); 
+	uint32_t upper = (x >> 16); 
 	// mask upper half away
-	uint16_t lower = (x & 0xFFFF);
-	return upper ? clz_recursive(upper) : 16 + clz_recursive(lower);
+	uint32_t lower = (x & 0x0000FFFF);
+	
+	return upper ? -16 + clz_recursive(upper) : lower ? -1 + clz_recursive(lower >> 1) : 32;
 }
 
-int clz_iteration(uint32_t x){
-    int n = 32, c = 16;
+uint8_t clz_iteration(uint32_t x){
+    uint8_t n = 32, c = 16;
     do {
         uint32_t y = x >> c;
         if (y) { n -= c; x = y; }
@@ -21,9 +22,9 @@ int clz_iteration(uint32_t x){
     return (n - x);
 }
 
-int clz_binary_search(uint32_t x){
+uint8_t clz_binary_search(uint32_t x){
 	if (x == 0) return 32;
-    int n = 0;
+    uint8_t n = 0;
     if (x <= 0x0000FFFF) { n += 16; x <<= 16; }
     if (x <= 0x00FFFFFF) { n += 8; x <<= 8; }
     if (x <= 0x0FFFFFFF) { n += 4; x <<= 4; }
@@ -32,9 +33,9 @@ int clz_binary_search(uint32_t x){
     return n;
 }
 
-int clz_byte_shift(uint32_t x){
+uint8_t clz_byte_shift(uint32_t x){
 	if (x == 0) return 32;
-    int n = 1;
+    uint8_t n = 1;
     if ((x >> 16) == 0) { n += 16; x <<= 16; }
     if ((x >> 24) == 0) { n += 8; x <<= 8; }
     if ((x >> 28) == 0) { n += 4; x <<= 4; }
